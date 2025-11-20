@@ -10,6 +10,46 @@ if (!isset($_SESSION['username'])) {
 
 // Ambil nama pengguna dari sesi
 $user = $_SESSION['username'];
+$user = $_SESSION['username'];
+
+// START KODE PHP BARU UNTUK COMMIT 6: Definisi Array Produk
+
+$produk = [
+    [
+        'Kode_barang' => 'PLG001',
+        'Nama_barang' => 'Kopi Sachet',
+        'Harga_barang' => 2000,
+        'Stok' => 50
+    ],
+    [
+        'Kode_barang' => 'PLG002',
+        'Nama_barang' => 'Mie Instan Kuah',
+        'Harga_barang' => 3500,
+        'Stok' => 45
+    ],
+    [
+        'Kode_barang' => 'PLG003',
+        'Nama_barang' => 'Air Mineral 600ml',
+        'Harga_barang' => 5000,
+        'Stok' => 80
+    ],
+    [
+        'Kode_barang' => 'PLG004',
+        'Nama_barang' => 'Sabun Mandi Batang',
+        'Harga_barang' => 4500,
+        'Stok' => 30
+    ],
+    [
+        'Kode_barang' => 'PLG005',
+        'Nama_barang' => 'Susu Kotak Kecil',
+        'Harga_barang' => 6000,
+        'Stok' => 65
+    ]
+];
+
+// END KODE PHP BARU UNTUK COMMIT 6
+
+?>
 ?>
 
 <!DOCTYPE html>
