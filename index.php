@@ -1,51 +1,33 @@
 <?php
-// Mulai session di awal skrip
+// 1. Memulai Sesi
 session_start();
 
-// Cek apakah user sudah login, jika ya, arahkan ke dashboard
-if (isset($_SESSION['username'])) {
-    header("Location: dashboard.php");
-    exit();
-}
+// Data login statis sesuai instruksi
+$valid_user = 'admin';
+$valid_pass = '1234';
 
-// Data pengguna yang valid (Gunakan konsep array)
-$users = [
-    'admin' => 'admin123',  // Username 'admin', Password 'admin123'
-    'polgan' => 'polgan123', // Username 'polgan', Password 'polgan123'
-    'sales' => 'sales123'    // Tambahan user lain
-];
-
-$error = '';
-
-// Cek jika form telah disubmit
-if (isset($_POST['login'])) {
+// Cek apakah formulir sudah disubmit
+if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Validasi input
-    if (empty($username) || empty($password)) {
-        $error = "Username dan password harus diisi!";
+    // 2. Proses Cek Username dan Password
+    if ($username === $valid_user && $password === $valid_pass) {
+        // 3. Jika Berhasil: Buat Sesi dan Arahkan ke Dashboard
+        $_SESSION['username'] = $username;
+        header("Location: dashboard.php");
+        exit(); // Penting untuk menghentikan eksekusi script setelah redirect
     } else {
-        // Cek apakah username ada di array $users
-        if (array_key_exists($username, $users)) {
-            // Cek apakah password cocok
-            if ($users[$username] === $password) {
-                // Login Berhasil
-                $_SESSION['username'] = $username;
-                header("Location: dashboard.php");
-                exit();
-            } else {
-                // Password salah
-                $error = "Username atau password salah!";
-            }
-        } else {
-            // Username tidak ditemukan
-            $error = "Username atau password salah!";
-        }
+        // 4. Jika Gagal: Tampilkan Pesan Error
+        $error_message = "Username atau password salah.";
     }
 }
-?>
 
+// Cek apakah ada pesan error untuk ditampilkan
+if (isset($error_message)) {
+    echo "<p style='color: red;'>$error_message</p>";
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
