@@ -97,6 +97,10 @@ $produk = [
     
     <tfoot>
         <tr>
+        <tfoot>
+            <tr>
+                <td colspan="4" style="text-align:right; font-weight: bold;">TOTAL BELANJA (Kotor):</td>
+                <td style="font-weight: bold;">Rp <?php echo number_format($grandtotal, 0, ',', '.'); ?></td>
             <td colspan="4" style="text-align:right; font-weight: bold;">TOTAL BELANJA (Sebelum Diskon):</td>
             <td style="font-weight: bold;">Rp <?php echo number_format($grandtotal, 0, ',', '.'); ?></td>
         </tr>
