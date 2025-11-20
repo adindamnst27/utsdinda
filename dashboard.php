@@ -106,6 +106,50 @@ $produk = [
         </tr>
     </tfoot>
     </table>
+    </table> 
+        
+        <br>
+        
+        <?php
+        // START KODE COMMIT 9: Logika Diskon Belanja (PHP)
+        $diskon_persen = 0;
+        $keterangan_diskon = "";
+
+        // 1. Menerapkan Logika Diskon
+        if ($grandtotal < 50000) {
+            $diskon_persen = 0.05; // 5%
+            $keterangan_diskon = "5% (Belanja di bawah Rp 50.000)";
+        } elseif ($grandtotal >= 50000 && $grandtotal <= 100000) {
+            $diskon_persen = 0.10; // 10%
+            $keterangan_diskon = "10% (Belanja antara Rp 50.000 - Rp 100.000)";
+        } else { // $grandtotal > 100000
+            $diskon_persen = 0.15; // 15%
+            $keterangan_diskon = "15% (Belanja di atas Rp 100.000)";
+        }
+
+        // 2. Menghitung Potongan Diskon dan Total Akhir
+        $jumlah_diskon = $grandtotal * $diskon_persen;
+        $total_akhir = $grandtotal - $jumlah_diskon;
+        // END KODE COMMIT 9 (PHP)
+        ?>
+
+        <table border="1" cellpadding="10" cellspacing="0" style="width: 50%;">
+            <tr>
+                <td style="font-weight: bold;">Diskon Belanja</td>
+                <td><?php echo $keterangan_diskon; ?></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">Potongan Diskon</td>
+                <td style="color: red;">Rp <?php echo number_format($jumlah_diskon, 0, ',', '.'); ?></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">TOTAL AKHIR YANG HARUS DIBAYAR</td>
+                <td style="font-weight: bold; background-color: #ccffcc;">Rp <?php echo number_format($total_akhir, 0, ',', '.'); ?></td>
+            </tr>
+        </table>
+        <p>
+            <a href="logout.php" class="btn-logout">Logout</a>
+        </p>
         <h2>Halaman Dashboard</h2>
         
         <section class="content-penjualan">
