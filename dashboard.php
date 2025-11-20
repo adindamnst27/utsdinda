@@ -68,6 +68,40 @@ $produk = [
     </header>
 
     <main>
+    <tbody>
+    <?php 
+    // START KODE BARU/MODIFIKASI UNTUK COMMIT 7
+
+    // 1. Inisialisasi Grand Total
+    $grandtotal = 0; 
+
+    // Menggunakan foreach untuk menampilkan setiap barang dalam tabel
+    foreach ($produk as $item) { 
+        // 2A. Hitung total harga per item 
+        $total_item = $item['Harga_barang'] * $item['Stok'];
+        
+        // 2B. Akumulasi total ke variabel $grandtotal
+        $grandtotal += $total_item; 
+    ?>
+    <tr>
+        <td><?php echo $item['Kode_barang']; ?></td>
+        <td><?php echo $item['Nama_barang']; ?></td>
+        <td>Rp <?php echo number_format($item['Harga_barang'], 0, ',', '.'); ?></td>
+        <td><?php echo $item['Stok']; ?></td>
+        <td>Rp <?php echo number_format($total_item, 0, ',', '.'); ?></td>
+    </tr>
+    <?php 
+    } 
+    ?>
+    </tbody>
+    
+    <tfoot>
+        <tr>
+            <td colspan="4" style="text-align:right; font-weight: bold;">TOTAL BELANJA (Sebelum Diskon):</td>
+            <td style="font-weight: bold;">Rp <?php echo number_format($grandtotal, 0, ',', '.'); ?></td>
+        </tr>
+    </tfoot>
+    </table>
         <h2>Halaman Dashboard</h2>
         
         <section class="content-penjualan">
