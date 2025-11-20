@@ -1,33 +1,3 @@
-<?php
-// 1. Memulai Sesi
-session_start();
-
-// Data login statis sesuai instruksi
-$valid_user = 'admin';
-$valid_pass = '1234';
-
-// Cek apakah formulir sudah disubmit
-if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    // 2. Proses Cek Username dan Password
-    if ($username === $valid_user && $password === $valid_pass) {
-        // 3. Jika Berhasil: Buat Sesi dan Arahkan ke Dashboard
-        $_SESSION['username'] = $username;
-        header("Location: dashboard.php");
-        exit(); // Penting untuk menghentikan eksekusi script setelah redirect
-    } else {
-        // 4. Jika Gagal: Tampilkan Pesan Error
-        $error_message = "Username atau password salah.";
-    }
-}
-
-// Cek apakah ada pesan error untuk ditampilkan
-if (isset($error_message)) {
-    echo "<p style='color: red;'>$error_message</p>";
-}
-?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
