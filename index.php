@@ -1,64 +1,84 @@
 <?php
-// Pastikan ini adalah baris pertama!
 session_start();
 
-// Data login statis sesuai instruksi
-$valid_user = 'admin';
-$valid_pass = '1234';
+$username = $_POST['username'];
+$password = $_POST['password'];
 
-// 1. INISIALISASI: Definisi variabel error di awal skrip
-$error_message = ""; 
+if ($username === "admin" && $password === "123") {
+    $_SESSION['username'] = $username;
+    header("Location: dashboard.php");
+    exit;
+} else {
+    echo "Login gagal! <br><a href='index.php'>Coba lagi</a>";
+}
 
-// Cek apakah formulir sudah disubmit
-if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    // Proses Cek Username dan Password
-    if ($username === $valid_user && $password === $valid_pass) {
-        // Jika Benar: Buat Sesi dan Arahkan ke Dashboard
-        $_SESSION['username'] = $username;
-        header("Location: dashboard.php");
-        exit(); // PENTING! Menghentikan eksekusi script setelah redirect
-    } else {
-        // Jika Salah: Set Pesan Error
-        $error_message = "Username atau password salah. Silakan coba lagi.";
-    }
+// Jika sudah login, langsung ke dashboard
+if (isset($_SESSION['username'])) {
+    header("Location: dashboard.php");
+    exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <title>Login | POLGAN Mart</title>
-    <link rel="stylesheet" href="style.css"> 
+    <meta charset="UTF-8">
+    <title>Login - POLGAN MART</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-box {
+            background: white;
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.2);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    
-    <div class="login-container">
-        <header class="header-utama">
-            <h1>Login POLGAN Mart</h1>
-        </header>
 
-        <?php
-        // 2. TAMPILKAN PESAN ERROR: Cek jika pesan error TIDAK KOSONG
-        if (!empty($error_message)) {
-            echo "<p style='color: red; text-align: center; font-weight: bold;'>$error_message</p>";
-        }
-        ?>
+<div class="login-box">
+    <h2>Login</h2>
 
-        <form method="POST" action="">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+    <form action="proses_login.php" method="POST">
+        <label>Username</label>
+        <input type="text" name="username" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        <label>Password</label>
+        <input type="password" name="password" required>
 
-            <input type="submit" name="submit" value="Login" class="btn-login">
-        </form>
-        
-        <p style="text-align: center; margin-top: 15px;">© 2025 POLGAN MART</p>
-    </div>
-    
+        <button type="submit">Masuk</button>
+    </form>
+</div>
+
 </body>
 </html>
